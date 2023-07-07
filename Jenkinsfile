@@ -19,6 +19,7 @@ pipeline {
                         ssh ubuntu@192.168.56.101  docker compose version
                         ssh ubuntu@192.168.56.101  docker images
                         ssh ubuntu@192.168.56.101  docker ps -a
+                        ssh ubuntu@192.168.56.101  docker rmi 021283c8eb95
                     '''
                 }
             }
