@@ -6,15 +6,23 @@ pipeline {
                 sshagent(credentials: ['virtualbox-ubuntu']) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no ubuntu@192.168.56.101 whoami
-                        docker info
-                        docker version
-                        docker compose version
-                        docker images
-                        docker ps -a
                     '''
                 }
             }
-        }        
+        }    
+          stage("Run docker on server") {
+            steps {
+                sshagent(credentials: ['virtualbox-ubuntu']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no ubuntu@192.168.56.101  docker info
+                        ssh -o StrictHostKeyChecking=no ubuntu@192.168.56.101  docker version
+                        ssh -o StrictHostKeyChecking=no ubuntu@192.168.56.101  docker compose version
+                        ssh -o StrictHostKeyChecking=no ubuntu@192.168.56.101  docker images
+                        ssh -o StrictHostKeyChecking=no ubuntu@192.168.56.101  docker ps -a
+                    '''
+                }
+            }
+        }       
         
             
        
